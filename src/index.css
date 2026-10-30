@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens
+   Use them in class names, e.g. bg-burgundy, text-gold, font-display
+------------------------------------------------------------------- */
+@theme {
+  --color-burgundy: #641e32;
+  --color-burgundy-deep: #4a1524;
+  --color-burgundy-soft: #7d2b42;
+  --color-cream: #faf7f0;
+  --color-parchment: #f1eadb; /* slightly deeper cream for alternating bands */
+  --color-gold: #c5a15a; /* decorative gold, use on burgundy or for large shapes */
+  --color-gold-ink: #8a6a2b; /* darker gold that passes contrast on cream */
+  --color-charcoal: #292929;
+  --color-ink-soft: #55504a; /* secondary text on cream */
+
+  --font-display: 'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif;
+  --font-serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Mukta Malar', 'Segoe UI', system-ui, sans-serif;
+  --font-tamil: 'Tiro Tamil', 'Mukta Malar', serif;
+
+  --ease-elegant: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream font-sans text-charcoal antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    overflow-x: clip;
+    font-variant-numeric: lining-nums;
+  }
+
+  /* Leave room for the sticky navbar when jumping to a section */
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-charcoal;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-burgundy-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .section-pad {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  /* Pulli (kolam dot grid) background texture */
+  .pulli-grid {
+    background-image: radial-gradient(circle, rgb(138 106 43 / 0.22) 1.2px, transparent 1.6px);
+    background-size: 28px 28px;
+  }
+
+  .pulli-grid-light {
+    background-image: radial-gradient(circle, rgb(197 161 90 / 0.18) 1.2px, transparent 1.6px);
+    background-size: 28px 28px;
+  }
+
+  .tamil {
+    font-family: var(--font-tamil);
+    line-height: 1.5;
+  }
+}
+
+/* Reduced motion: no smooth scrolling either */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
